@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<!-- ADMIN (login + private panel, logic in js/pages/admin.js) -->
+<html lang="en">
+
+<!-- HEAD BEGINNING -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>FixHub | Admin</title>
+    <link rel="icon" type="image/png" href="../resources/LOGOS/isotipo_azul.png">
+    <link rel="stylesheet" href="../css/myStyles.css">
+</head>
+<!-- HEAD ENDING -->
+
+<body data-page="admin" class="auth-body">
+    <!-- HEADER (rendered by js/components/layout.js) -->
+    <div id="site-header"></div>
+
+    <!-- LOGIN BEGINNING -->
+    <div class="auth-page" id="admin-login" hidden>
+        <main class="auth-layout">
+            <section class="auth-intro">
+                <p class="auth-tagline" data-i18n-block="adminIntroTagline">Admin area</p>
+                <h1 data-i18n-block="adminIntroTitle">Manage FixHub</h1>
+                <p class="auth-desc" data-i18n-block="adminIntroDesc">Private panel for the FixHub team.</p>
+                <ul>
+                    <li data-i18n-block="adminIntroItem1">Create, edit and hide catalog services</li>
+                    <li data-i18n-block="adminIntroItem2">Write service descriptions with AI</li>
+                    <li data-i18n-block="adminIntroItem3">Answer contact requests and track their status</li>
+                </ul>
+            </section>
+
+            <div class="auth-card">
+                <p class="auth-tagline" data-i18n-block="loginCardTagline">Welcome back</p>
+                <h2 data-i18n-block="adminLoginTitle">Admin login</h2>
+
+                <form class="auth-form" id="login-form" novalidate>
+                    <p id="login-feedback" class="form-alert" role="alert" hidden></p>
+
+                    <label for="login-email" data-i18n-block="contactEmail">Email</label>
+                    <input type="email" id="login-email" autocomplete="username" required aria-describedby="login-email-error">
+                    <small class="field-error" id="login-email-error"></small>
+
+                    <label for="login-password" data-i18n-block="loginCardPassword">Password</label>
+                    <input type="password" id="login-password" autocomplete="current-password" required aria-describedby="login-password-error">
+                    <small class="field-error" id="login-password-error"></small>
+
+                    <button type="submit" class="button button-primary" data-i18n-block="loginCardButton">Sign in</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <!-- LOGIN ENDING -->
+
+    <!-- ADMIN PANEL BEGINNING -->
+    <main class="content admin-panel" id="admin-panel" hidden>
+
+        <div class="admin-topbar">
+            <div>
+                <p class="tagline" data-i18n-block="adminIntroTagline">Admin area</p>
+                <h1 data-i18n-block="adminPanelTitle">FixHub dashboard</h1>
+                <p class="admin-user"><span data-i18n-block="adminSignedInAs">Signed in as</span> <strong id="admin-email"></strong></p>
+            </div>
+            <button type="button" class="button button-outline" id="logout-btn" data-i18n-block="navLogout">Logout</button>
+        </div>
+
+        <!-- STATS -->
+        <section class="stats-grid" aria-label="Summary">
+            <div class="stat-card"><span class="stat-value" id="stat-services">–</span><span class="stat-label" data-i18n-block="adminStatServices">Services</span></div>
+            <div class="stat-card"><span class="stat-value" id="stat-active">–</span><span class="stat-label" data-i18n-block="adminStatActive">Visible in catalog</span></div>
+            <div class="stat-card stat-highlight"><span class="stat-value" id="stat-new">–</span><span class="stat-label" data-i18n-block="adminStatNew">New messages</span></div>
+        </section>
+
+        <!-- TABS -->
+        <div class="tabs" role="tablist">
+            <button type="button" role="tab" id="tab-btn-services" aria-controls="tab-services" aria-selected="true" data-i18n-block="adminTabServices">Services</button>
+            <button type="button" role="tab" id="tab-btn-messages" aria-controls="tab-messages" aria-selected="false" data-i18n-block="adminTabMessages">Messages</button>
+        </div>
+
+        <!-- SERVICES TAB -->
+        <section id="tab-services" role="tabpanel" aria-labelledby="tab-btn-services">
+            <div class="section-heading">
+                <h2 data-i18n-block="adminServicesTitle">Service catalog</h2>
+                <button type="button" class="button button-primary" id="new-service-btn" data-i18n-block="adminNewService">New service</button>
+            </div>
+
+            <div class="card form-card" id="service-form-card" hidden>
+                <h3 id="service-form-title" data-i18n-block="adminNewService">New service</h3>
+                <form id="service-form" class="form" novalidate>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="service-name-en" data-i18n-block="adminNameEn">Name (English)</label>
+                            <input id="service-name-en" type="text" maxlength="80" required aria-describedby="service-name-en-error">
+                            <small class="field-error" id="service-name-en-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="service-name-es" data-i18n-block="adminNameEs">Name (Spanish)</label>
+                            <input id="service-name-es" type="text" maxlength="80" required aria-describedby="service-name-es-error">
+                            <small class="field-error" id="service-name-es-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-row form-row-4">
+                        <div class="form-field">
+                            <label for="service-category" data-i18n-block="adminColCategory">Category</label>
+                            <select id="service-category">
+                                <option value="repair" data-i18n-block="categoryRepair">Repair</option>
+                                <option value="maintenance" data-i18n-block="categoryMaintenance">Maintenance</option>
+                                <option value="upgrade" data-i18n-block="categoryUpgrade">Upgrades</option>
+                                <option value="support" data-i18n-block="categorySupport">Support</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="service-price" data-i18n-block="servicePrice">Price</label>
+                            <input id="service-price" type="number" min="0" step="0.01" required aria-describedby="service-price-error">
+                            <small class="field-error" id="service-price-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="service-duration" data-i18n-block="adminDuration">Time (minutes)</label>
+                            <input id="service-duration" type="number" min="5" max="1440" step="1" required aria-describedby="service-duration-error">
+                            <small class="field-error" id="service-duration-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="service-sort" data-i18n-block="adminSort">Order</label>
+                            <input id="service-sort" type="number" step="1" required aria-describedby="service-sort-error">
+                            <small class="field-error" id="service-sort-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="ai-helper">
+                        <p data-i18n-block="adminAiHint">Fill in the name, category, price and time, then let the AI write both descriptions in the FixHub tone.</p>
+                        <button type="button" class="button button-ai" id="ai-generate-btn" data-i18n-block="adminAiGenerate">✨ Generate descriptions with AI</button>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="service-desc-en" data-i18n-block="adminDescEn">Description (English)</label>
+                            <textarea id="service-desc-en" rows="4" maxlength="400" required aria-describedby="service-desc-en-error"></textarea>
+                            <small class="field-error" id="service-desc-en-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="service-desc-es" data-i18n-block="adminDescEs">Description (Spanish)</label>
+                            <textarea id="service-desc-es" rows="4" maxlength="400" required aria-describedby="service-desc-es-error"></textarea>
+                            <small class="field-error" id="service-desc-es-error"></small>
+                        </div>
+                    </div>
+
+                    <label class="checkbox">
+                        <input id="service-active" type="checkbox" checked>
+                        <span data-i18n-block="adminActiveLabel">Visible in the public catalog</span>
+                    </label>
+
+                    <div class="actions">
+                        <button type="submit" class="button button-primary" data-i18n-block="adminSave">Save service</button>
+                        <button type="button" class="button button-outline" id="service-cancel" data-i18n-block="adminCancel">Cancel</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="services-list" class="table-wrapper" aria-live="polite"></div>
+        </section>
+
+        <!-- MESSAGES TAB -->
+        <section id="tab-messages" role="tabpanel" aria-labelledby="tab-btn-messages" hidden>
+            <div class="section-heading">
+                <h2 data-i18n-block="adminMessagesTitle">Contact requests</h2>
+                <label class="inline-select">
+                    <span data-i18n-block="adminFilter">Show</span>
+                    <select id="message-filter">
+                        <option value="all" data-i18n-block="adminFilterAll">All</option>
+                        <option value="new" data-i18n-block="statusNew">New</option>
+                        <option value="in_progress" data-i18n-block="statusInProgress">In progress</option>
+                        <option value="resolved" data-i18n-block="statusResolved">Resolved</option>
+                    </select>
+                </label>
+            </div>
+            <div id="messages-list" class="messages-list" aria-live="polite"></div>
+        </section>
+    </main>
+    <!-- ADMIN PANEL ENDING -->
+
+    <!-- FOOTER (rendered by js/components/layout.js) -->
+    <div id="site-footer"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/pages/admin.js"></script>
+</body>
+
+</html>
