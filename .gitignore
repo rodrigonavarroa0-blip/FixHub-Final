@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Local tooling / AI agent state (not part of the website)
+.autoclaw/
+.agent/
+.claude/
+
+# Supabase CLI local files and secrets
+supabase/.temp/
+supabase/.branches/
+.env
+.env.*
