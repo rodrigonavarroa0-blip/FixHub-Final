@@ -5,8 +5,8 @@
 
 export const CONFIG = {
     //Supabase project (Dashboard > Project Settings > API).
-    supabaseUrl: "https://YOUR-PROJECT-ID.supabase.co",
-    supabaseAnonKey: "YOUR-SUPABASE-ANON-OR-PUBLISHABLE-KEY",
+    supabaseUrl: "https://ghqjehsicmtlwdgarzbr.supabase.co",
+    supabaseAnonKey: "sb_publishable_GyjW2TGfLlaQK50U9GUqwg_sErft7Yx",
 
     //Currency used to display catalog prices.
     currency: "USD",
