@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- CONTACT (form saved in Supabase by js/pages/contact.js) -->
+<html lang="en">
+
+<!-- HEAD BEGINNING -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact a FixHub technician and request a computer repair service.">
+    <title>FixHub | Contact</title>
+    <link rel="icon" type="image/png" href="../resources/LOGOS/isotipo_azul.png">
+    <link rel="stylesheet" href="../css/myStyles.css">
+</head>
+<!-- HEAD ENDING -->
+
+<body data-page="contact">
+    <!-- HEADER (rendered by js/components/layout.js) -->
+    <div id="site-header"></div>
+
+    <!-- PAGE CONTENT BEGINNING -->
+    <main class="content">
+
+        <!-- PAGE HERO BEGINNING -->
+        <section class="hero hero-support">
+            <div class="hero-content">
+                <p class="tagline" data-i18n-block="supportHeroTagline">Support</p>
+                <h1 data-i18n-block="supportHeroTitle">Need professional help?</h1>
+                <p data-i18n-block="supportHeroDesc">If the problem continues after basic checks, it may be time to request support from a technician or repair service.</p>
+            </div>
+        </section>
+        <!-- PAGE HERO ENDING -->
+
+        <div class="contact-layout">
+
+            <!-- WHEN TO ASK FOR HELP BEGINNING -->
+            <aside class="card reveal">
+                <h3 data-i18n-block="supportCardTitle">When to ask for help</h3>
+                <ul>
+                    <li data-i18n-block="supportCardItem1">The computer does not turn on at all</li>
+                    <li data-i18n-block="supportCardItem2">There are repeated blue screens even after updates</li>
+                    <li data-i18n-block="supportCardItem3">Hardware parts look damaged or overheated</li>
+                    <li data-i18n-block="supportCardItem4">You are not comfortable opening the device</li>
+                </ul>
+                <p class="contact-note" data-i18n-block="contactResponseTime">We usually answer within one business day.</p>
+                <button type="button" class="button button-outline" data-open-chat data-i18n-block="contactAskAi">Let FixBot write it for me</button>
+            </aside>
+            <!-- WHEN TO ASK FOR HELP ENDING -->
+
+            <!-- CONTACT FORM BEGINNING -->
+            <section class="card form-card" aria-labelledby="contact-title">
+                <h2 id="contact-title" data-i18n-block="contactTitle">Request a technician</h2>
+
+                <form id="contact-form" class="form" novalidate>
+                    <p id="contact-feedback" class="form-alert" role="alert" hidden></p>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="contact-name" data-i18n-block="contactName">Full name</label>
+                            <input id="contact-name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="contact-name-error">
+                            <small class="field-error" id="contact-name-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-email" data-i18n-block="contactEmail">Email</label>
+                            <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="120" required aria-describedby="contact-email-error">
+                            <small class="field-error" id="contact-email-error"></small>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="contact-phone"><span data-i18n-block="contactPhone">Phone</span> <span class="optional" data-i18n-block="optional">(optional)</span></label>
+                            <input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="30" aria-describedby="contact-phone-error">
+                            <small class="field-error" id="contact-phone-error"></small>
+                        </div>
+                        <div class="form-field">
+                            <label for="contact-service" data-i18n-block="contactService">Service</label>
+                            <select id="contact-service" name="service"></select>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="contact-message" data-i18n-block="contactMessage">What is happening with your computer?</label>
+                        <textarea id="contact-message" name="message" rows="6" maxlength="2000" required aria-describedby="contact-message-error contact-message-counter" data-i18n-placeholder="contactMessagePlaceholder" placeholder="Example: my laptop turns off by itself after 10 minutes and the fan is very loud."></textarea>
+                        <div class="field-footer">
+                            <small class="field-error" id="contact-message-error"></small>
+                            <small class="field-counter" id="contact-message-counter">0 / 2000</small>
+                        </div>
+                    </div>
+
+                    <!-- Honeypot: hidden from people, bots fill it and get ignored -->
+                    <div class="honeypot" aria-hidden="true">
+                        <label for="contact-website">Website</label>
+                        <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <button type="submit" class="button button-primary" data-i18n-block="contactSubmit">Send request</button>
+                </form>
+
+                <!-- SUCCESS STATE -->
+                <div id="contact-success" class="form-success" hidden tabindex="-1" role="status">
+                    <div class="success-icon" aria-hidden="true">✓</div>
+                    <h3 data-i18n-block="contactSuccessTitle">Request sent!</h3>
+                    <p data-i18n-block="contactSuccessDesc">Thank you. A FixHub technician will contact you soon by email.</p>
+                    <button type="button" id="contact-again" class="button button-outline" data-i18n-block="contactAgain">Send another message</button>
+                </div>
+            </section>
+            <!-- CONTACT FORM ENDING -->
+
+        </div>
+    </main>
+    <!-- PAGE CONTENT ENDING -->
+
+    <!-- FOOTER (rendered by js/components/layout.js) -->
+    <div id="site-footer"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/pages/contact.js"></script>
+</body>
+
+</html>
