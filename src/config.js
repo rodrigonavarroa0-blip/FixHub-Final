@@ -13,7 +13,7 @@ export const CONFIG = {
 
     //AI assistant provider:
     //  "local" -> the browser talks to Ollama running on this computer (great for development and the defense demo).
-    //  "edge"  -> the browser calls the Supabase Edge Function "ai-chat", which talks to Ollama Cloud (works for every visitor).
+    //  "edge"  -> the browser calls the Supabase Edge Function "ai-chat", which talks to Groq (works for every visitor).
     //  "auto"  -> "local" when the site is opened from localhost, "edge" when it is published.
     ai: {
         provider: "auto",

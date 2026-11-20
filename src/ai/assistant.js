@@ -1,17 +1,17 @@
-/* ASSISTANT - JAVASCRIPT */
+/* ASSISTANT - JAVASCRIPT (no React here: plain functions used by the React components) */
 /* The FixHub AI layer. It builds the "personality" of the assistant (system prompt with
    the brand tone + the real service catalog from the database) and sends the conversation
-   to Ollama, either running locally or through the Supabase Edge Function. */
+   to the AI: Ollama running locally, or Groq through the Supabase Edge Function.
+   Every public function receives `lang` ("en" | "es") from the LanguageContext. */
 
 import { CONFIG, getAiProvider } from "../config.js";
-import { ApiError, invokeFunction, listServices } from "../core/supabase.js";
-import { getLanguage } from "../core/i18n.js";
+import { ApiError, invokeFunction, listServices } from "../services/supabase.js";
 
 /* -------------------------------------------------------------- */
 /* CATALOG CONTEXT                                                */
 /* -------------------------------------------------------------- */
 
-//The catalog is loaded once per page and reused in every prompt.
+//The catalog is loaded once per visit and reused in every prompt.
 let catalogPromise = null;
 
 function loadCatalog() {
@@ -23,7 +23,7 @@ function loadCatalog() {
 
 function catalogText(services, lang) {
     if (!services.length) {
-        return "The catalog could not be loaded right now. If the visitor needs a technician, send them to the Services page (services.html).";
+        return "The catalog could not be loaded right now. If the visitor needs a technician, send them to the Services page.";
     }
     return services.map((service) => {
         const name = lang === "es" ? service.name_es : service.name_en;
@@ -38,8 +38,7 @@ function catalogText(services, lang) {
 
 const LANGUAGE_NAMES = { en: "English", es: "Spanish" };
 
-async function chatSystemPrompt() {
-    const lang = getLanguage();
+async function chatSystemPrompt(lang) {
     const services = await loadCatalog();
     return `You are FixBot, the virtual assistant of FixHub, a computer troubleshooting and repair business.
 
@@ -117,8 +116,8 @@ async function complete(messages, { format } = {}) {
 /* -------------------------------------------------------------- */
 
 //Chat: `history` is [{ role: "user" | "assistant", content }]. Only the last turns are sent.
-export async function askAssistant(history) {
-    const system = await chatSystemPrompt();
+export async function askAssistant(history, lang) {
+    const system = await chatSystemPrompt(lang);
     const recentTurns = history.slice(-10);
     return complete([{ role: "system", content: system }, ...recentTurns]);
 }
@@ -127,8 +126,7 @@ export async function askAssistant(history) {
 //Only the visitor's own words are used as facts, so the model cannot turn FixBot's
 //questions into invented statements. The recommended service is detected in code by
 //looking for catalog names inside FixBot's answers.
-export async function draftContactMessage(history) {
-    const lang = getLanguage();
+export async function draftContactMessage(history, lang) {
     const services = await loadCatalog();
 
     const visitorFacts = history

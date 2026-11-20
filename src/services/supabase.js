@@ -1,4 +1,4 @@
-/* SUPABASE - JAVASCRIPT */
+/* SUPABASE - JAVASCRIPT (service layer: the React components never call fetch() directly) */
 /* Small client for the Supabase REST APIs written with fetch(), so every request the
    app makes is visible and easy to explain (no external SDK needed).
    - Data:      {url}/rest/v1/...       (PostgREST)
@@ -19,10 +19,10 @@ export class ApiError extends Error {
     }
 }
 
-//Throws a clear error when the project keys were not added to js/config.js yet.
+//Throws a clear error when the project keys were not added to src/config.js yet.
 function assertConfigured() {
     if (!isSupabaseConfigured()) {
-        throw new ApiError("Supabase is not configured. Add your project URL and key in js/config.js.", 0, "not_configured");
+        throw new ApiError("Supabase is not configured. Add your project URL and key in src/config.js.", 0, "not_configured");
     }
 }
 

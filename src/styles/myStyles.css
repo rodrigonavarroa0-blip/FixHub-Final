@@ -151,7 +151,7 @@ a {
     display: none;
     width: 30px;
     height: 30px;
-    background-image: url('../resources/menu.png');
+    background-image: url('../../resources/menu.png');
     background-size: contain;       /*Scales the 3-bar icon to fit inside 30x30px without distortion*/
     background-repeat: no-repeat;   /*Prevents the icon from repeating*/
     background-position: center;    /*Centers the image within the button*/
@@ -297,7 +297,7 @@ main {
 /*We use a full-width hero cover with a dark gradient over indexBG.jpg in order to ensure maximum text readability.*/
 .hero-index {
     position: relative;
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.78) 45%, rgba(8, 20, 36, 0.22) 100%), url('../resources/banners/indexBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.78) 45%, rgba(8, 20, 36, 0.22) 100%), url('../../resources/banners/indexBG.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -425,19 +425,19 @@ main {
 /*- At 0% to 45% (left side): High opacity (92% to 75%) creates a dark background so white text is 100% readable.*/
 /*- At 100% (right side): Low opacity (15%) makes the gradient transparent so the workshop hardware image is clearly visible.*/
 .hero-diagnose {
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../resources/banners/diagnoseBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../../resources/banners/diagnoseBG.jpg');
 }
 
 .hero-guides {
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../resources/banners/guidesBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../../resources/banners/guidesBG.jpg');
 }
 
 .hero-maintenance {
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../resources/banners/maintenanceBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../../resources/banners/maintenanceBG.jpg');
 }
 
 .hero-support {
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../resources/banners/supportBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../../resources/banners/supportBG.jpg');
 }
 
 /*This rule organizes buttons inside inner banners horizontally with a 12px gap.*/
@@ -768,7 +768,7 @@ main {
     .hero-index {
         min-height: auto;
         padding: 36px 18px;
-        background-image: linear-gradient(rgba(8, 20, 36, 0.9), rgba(8, 20, 36, 0.9)), url('../resources/banners/indexBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.9), rgba(8, 20, 36, 0.9)), url('../../resources/banners/indexBG.jpg');
     }
 
     /*Reduces heading size to 1.45rem on mobile phones so titles fit cleanly without awkward wrapping.*/
@@ -801,19 +801,19 @@ main {
     /*Therefore, we use a uniform linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)) to cover the whole image with an 88% dark tint, ensuring 100% white text readability across any phone.*/
     /*Note: In CSS, background-image links the gradient and url() together. Because each section has a different photo (diagnoseBG, guidesBG, etc.), we restate each class with its corresponding image URL.*/
     .hero-diagnose {
-        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/diagnoseBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../../resources/banners/diagnoseBG.jpg');
     }
 
     .hero-guides {
-        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/guidesBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../../resources/banners/guidesBG.jpg');
     }
 
     .hero-maintenance {
-        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/maintenanceBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../../resources/banners/maintenanceBG.jpg');
     }
 
     .hero-support {
-        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/supportBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../../resources/banners/supportBG.jpg');
     }
 
     /*This rule is in charge of stacking all cards into a single column on phones for comfortable vertical scrolling.*/
@@ -937,7 +937,7 @@ button:disabled {
 /* ---------- Services hero ---------- */
 
 .hero-services {
-    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../resources/banners/indexBG.jpg');
+    background-image: linear-gradient(to right, rgba(8, 20, 36, 0.92) 0%, rgba(8, 20, 36, 0.75) 45%, rgba(8, 20, 36, 0.15) 100%), url('../../resources/banners/indexBG.jpg');
     background-size: cover;
     background-position: center right;
     min-height: 280px;
@@ -1856,7 +1856,7 @@ button:disabled {
 @media (max-width: 768px) {
     .hero-services {
         min-height: auto;
-        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../resources/banners/indexBG.jpg');
+        background-image: linear-gradient(rgba(8, 20, 36, 0.88), rgba(8, 20, 36, 0.88)), url('../../resources/banners/indexBG.jpg');
     }
 
     .hero-services h1 {
