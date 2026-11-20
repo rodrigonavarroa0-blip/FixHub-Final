@@ -11,3 +11,7 @@ supabase/.temp/
 supabase/.branches/
 .env
 .env.*
+
+# React / Vite
+node_modules/
+dist/
